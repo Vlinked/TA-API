@@ -33,7 +33,7 @@ namespace TA_API.EntityModels
             modelBuilder.Entity<CandidateProfile>(entity =>
             {
                 entity.HasKey(e => e.ProfileId)
-                    .HasName("PK__Candidat__290C88E4BDFA701A");
+                    .HasName("PK__Candidat__290C88E437098087");
 
                 entity.Property(e => e.CreateDate)
                     .HasMaxLength(100)
@@ -80,17 +80,11 @@ namespace TA_API.EntityModels
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Resumeattachmen).IsUnicode(false);
+                entity.Property(e => e.Resumeattachment).IsUnicode(false);
 
                 entity.Property(e => e.Skills)
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.CandidateProfile)
-                    .HasForeignKey(d => d.Userid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Candidate__LastM__5535A963");
             });
 
             modelBuilder.Entity<Roles>(entity =>

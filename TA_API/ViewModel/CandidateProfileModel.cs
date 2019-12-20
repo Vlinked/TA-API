@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TA_API.EntityModels
+namespace TA_API.ViewModel
 {
-    public partial class CandidateProfile
+    public class CandidateProfileModel
     {
-        public int ProfileId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MobileNumber { get; set; }
@@ -21,8 +23,8 @@ namespace TA_API.EntityModels
         public int Userid { get; set; }
         public string CreateDate { get; set; }
         public string Resumeattachment { get; set; }
-        public bool IsActive { get; set; }
-        public int? LastModifiedBy { get; set; }
-        public string LastModifiedDate { get; set; }
+        public bool FileExist { get; set; }
+        public IFormFile FileUpload { get; set; }
+
     }
 }

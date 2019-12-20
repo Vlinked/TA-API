@@ -40,6 +40,7 @@ namespace TA_API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserRegister, UserRegister>();
+            services.AddTransient<ICandidateProfile, CandidateProfileService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TA_API", Version = "v1" });

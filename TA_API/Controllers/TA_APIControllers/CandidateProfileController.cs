@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Http;
@@ -14,25 +13,22 @@ namespace TA_API.Controllers.TA_APIControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountRegisterController : ControllerBase
+    public class CandidateProfileController : ControllerBase
     {
-        private readonly IUserRegister _repository;
-        public AccountRegisterController(IUserRegister _repository)
+
+        private readonly ICandidateProfile _repository;
+        public CandidateProfileController(ICandidateProfile _repository)
         {
             this._repository = _repository;
         }
         [HttpPost]
-       
-        public IActionResult Post(UsersModel usersmodel)
+        [Consumes("multipart/form-data")]
+        public IActionResult Post([FromForm] CandidateProfileModel candidateProfile)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                Users users= _repository.CreateUser(usersmodel);
-                return Ok(new { Status = StatusCodes.Status200OK, Message = "success", users });
+                CandidateProfile Profile = _repository.ProfileSave(candidateProfile);
+                return Ok(new { Status = StatusCodes.Status200OK, Message = "success", Profile });
             }
             catch (HttpException ex)
             {
@@ -42,6 +38,8 @@ namespace TA_API.Controllers.TA_APIControllers
             {
                 return new ObjectResult(new { Status = StatusCodes.Status500InternalServerError, Message = ex.Message });
             }
+
+
         }
     }
 }
