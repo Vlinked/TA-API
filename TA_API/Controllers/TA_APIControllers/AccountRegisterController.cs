@@ -21,8 +21,9 @@ namespace TA_API.Controllers.TA_APIControllers
         {
             this._repository = _repository;
         }
+
+
         [HttpPost]
-       
         public IActionResult Post(UsersModel usersmodel)
         {
             try
@@ -31,7 +32,7 @@ namespace TA_API.Controllers.TA_APIControllers
                 {
                     return BadRequest(ModelState);
                 }
-                Users users= _repository.CreateUser(usersmodel);
+                Users users = _repository.CreateUser(usersmodel);
                 return Ok(new { Status = StatusCodes.Status200OK, Message = "success", users });
             }
             catch (HttpException ex)
@@ -43,5 +44,7 @@ namespace TA_API.Controllers.TA_APIControllers
                 return new ObjectResult(new { Status = StatusCodes.Status500InternalServerError, Message = ex.Message });
             }
         }
+
+
     }
 }

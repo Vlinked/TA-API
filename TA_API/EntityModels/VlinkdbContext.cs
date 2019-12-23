@@ -105,7 +105,7 @@ namespace TA_API.EntityModels
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.HasKey(e => e.Userid)
-                    .HasName("PK__Users__1797D024B4E88276");
+                    .HasName("PK__Users__1797D024C3905916");
 
                 entity.Property(e => e.CreateDate)
                     .HasMaxLength(100)
@@ -116,7 +116,15 @@ namespace TA_API.EntityModels
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.LastModifiedDate)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 

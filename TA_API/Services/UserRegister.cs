@@ -23,28 +23,28 @@ namespace TA_API.Services
         }
         public Users CreateUser(UsersModel model)
         {
-           
+
             Users users = new Users();
             try
             {
                 Users userslist = repository.FindByCondition(x => x.EmailId == model.EmailId).FirstOrDefault();
-                if (userslist!=null)
+                if (userslist != null)
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, "EmailId Already exist,Please Try Again");
                 }
-                
+                users.FirstName = model.FirstName;
+                users.LastName = model.LastName;
                 users.UserName = model.UserName;
                 users.EmailId = model.EmailId;
                 users.Password = EncryptionHelper.Encrypt(model.Password);
                 users.IsActive = true;
                 users.MobileNo = model.MobileNo;
-                users.CreateDate= DateTime.Now.ToString();
+                users.CreateDate = DateTime.Now.ToString();
                 users.LastModifiedDate = model.LastModifiedDate;
                 users.ProfileImg = model.ProfileImg;
-                users.RoleId = model.RoleId;
+                users.RoleId = (model.RoleId == 0) ? 4 : model.RoleId;
                 repository.Insert(users);
                 repository.Save();
-
             }
             catch (HttpException ex)
             {
@@ -56,6 +56,38 @@ namespace TA_API.Services
                 throw ex;
             }
             return users;
+        }
+
+        public Users LoginUser(LoginModel loginModel)
+        {
+
+            try
+            {
+                var userslist = new Users();
+                if (loginModel.UserNameorEmail.Contains("@"))
+                {
+                    userslist = repository.FindByCondition(x => x.EmailId == loginModel.UserNameorEmail && x.Password == EncryptionHelper.Encrypt(loginModel.Password) && x.IsActive == true).FirstOrDefault();
+                }
+                else
+                {
+                    userslist = repository.FindByCondition(x => x.UserName == loginModel.UserNameorEmail && x.Password == EncryptionHelper.Encrypt(loginModel.Password) && x.IsActive == true).FirstOrDefault();
+                }
+                if (userslist == null)
+                {
+                    throw new HttpException((int)HttpStatusCode.NotFound, " Login Failed,Please Try Again");
+                }
+
+                return userslist;
+            }
+            catch (HttpException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }
