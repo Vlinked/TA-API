@@ -19,6 +19,7 @@ namespace TA_API.RepositoryService
         {
             try
             {
+                jobAppliedmodel.IsAccepted = true;
                 jobAppliedmodel.CreateDate = DateTime.Now.ToString();
                 repository.Insert(jobAppliedmodel);
                 repository.Save();

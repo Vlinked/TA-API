@@ -10,6 +10,7 @@ namespace TA_API.EntityModels
         public int JobId { get; set; }
         public string Designation { get; set; }
         public int ProfiledId { get; set; }
+        public bool IsAccepted { get; set; }
         public string CreateDate { get; set; }
     }
 }

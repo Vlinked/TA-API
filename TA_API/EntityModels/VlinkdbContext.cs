@@ -103,7 +103,7 @@ namespace TA_API.EntityModels
             modelBuilder.Entity<JobApplied>(entity =>
             {
                 entity.HasKey(e => e.JobApplId)
-                    .HasName("PK__JobAppli__E4CE0E7D732F3E4E");
+                    .HasName("PK__JobAppli__E4CE0E7DDE9CF304");
 
                 entity.Property(e => e.CreateDate)
                     .HasMaxLength(100)
