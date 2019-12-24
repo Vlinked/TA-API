@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TA_API.EntityModels;
 using TA_API.Interface;
+using TA_API.ViewModel;
 
 namespace TA_API.Controllers.TA_APIControllers
 {
@@ -36,7 +37,7 @@ namespace TA_API.Controllers.TA_APIControllers
 
 
         [HttpPut]
-        public IActionResult Put(JobApplied jobAppliedmodel)
+        public IActionResult Put(RejectJobmodel jobAppliedmodel)
         {
             try
             {

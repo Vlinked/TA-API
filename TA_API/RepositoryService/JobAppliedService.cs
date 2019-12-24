@@ -7,6 +7,7 @@ using System.Web;
 using TA_API.EntityModels;
 using TA_API.Interface;
 using TA_API.IRepositoryService;
+using TA_API.ViewModel;
 
 namespace TA_API.RepositoryService
 {
@@ -33,23 +34,22 @@ namespace TA_API.RepositoryService
             }
         }
 
-        public JobApplied RejectJobApplied(JobApplied jobAppliedmodel)
+        public JobApplied RejectJobApplied(RejectJobmodel jobAppliedmodel)
         {
             try
             {
-                JobApplied jobs = repository.FindBy(x => x.JobId == jobAppliedmodel.JobId && x.IsAccepted == true).FirstOrDefault();
+                JobApplied jobs = repository.FindBy(x => x.JobApplId == jobAppliedmodel.JobApplId && x.IsAccepted == true).FirstOrDefault();
 
                 if (jobs == null)
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, "JobId not Found ,Please Try Again");
                 }
-
                 jobs.IsAccepted = jobAppliedmodel.IsAccepted;
                 jobs.LastModifiedBy = jobAppliedmodel.LastModifiedBy;
                 jobs.LastModifiedDate = DateTime.Now.ToString();
                 repository.Update(jobs);
                 repository.Save();
-                return jobAppliedmodel;
+                return jobs;
 
             }
             catch (HttpException ex)
