@@ -42,6 +42,7 @@ namespace TA_API
             services.AddTransient<IUserRegister, UserRegister>();
             services.AddTransient<ICandidateProfile, CandidateProfileService>();
             services.AddTransient<INewJob, NewJobService>();
+            services.AddTransient<IJobApplied, JobAppliedService>();
 
             services.AddSwaggerGen(c =>
             {
