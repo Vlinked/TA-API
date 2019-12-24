@@ -16,12 +16,12 @@ namespace TA_API.UtilityClass
         {
             this.accessKey = "DefaultEndpointsProtocol=https;AccountName=vlinkstoragefiles;AccountKey=u9aE/xdtETiPseDfskHQI0LnHo+RucvHtiyoPnNhTeJpYrgLPpGDoVlumJ3XtzySTMi1b/XIVJQQLpxFR5+6UQ==;EndpointSuffix=core.windows.net";
         }
-        public string UploadFileToBlob(string strFileName, byte[] fileData, string fileMimeType)
+        public string UploadFileToBlob(string strFileName, byte[] fileData, string fileMimeType,string containerName)
         {
             try
             {
 
-                var _task = Task.Run(() => this.UploadFileToBlobAsync(strFileName, fileData, fileMimeType));
+                var _task = Task.Run(() => this.UploadFileToBlobAsync(strFileName, fileData, fileMimeType, containerName));
                 _task.Wait();
                 string fileUrl = _task.Result;
                 return fileUrl;
@@ -61,13 +61,13 @@ namespace TA_API.UtilityClass
             return strFileName;
         }
 
-        private async Task<string> UploadFileToBlobAsync(string strFileName, byte[] fileData, string fileMimeType)
+        private async Task<string> UploadFileToBlobAsync(string strFileName, byte[] fileData, string fileMimeType,string strContainerName)
         {
             try
             {
                 CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(accessKey);
                 CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-                string strContainerName = "fileconatiner";
+                //string strContainerName = "fileconatiner";
                 CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(strContainerName);
                 string fileName = this.GenerateFileName(strFileName);
 

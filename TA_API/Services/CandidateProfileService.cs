@@ -40,9 +40,9 @@ namespace TA_API.Services
 
                         byte[] fileData = new byte[Profilemodel.FileUpload.Length];
                         string mimeType = Profilemodel.FileUpload.ContentType;
-
+                        string strContainerName = "fileconatiner";
                         BlobStorageService objBlobService = new BlobStorageService();
-                        ResponesUrl =objBlobService.UploadFileToBlob(Profilemodel.FileUpload.FileName, fileData, mimeType);
+                        ResponesUrl =objBlobService.UploadFileToBlob(Profilemodel.FileUpload.FileName, fileData, mimeType, strContainerName);
                     }
                 }
                 profilemd.FirstName = Profilemodel.FirstName;

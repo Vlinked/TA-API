@@ -21,6 +21,8 @@ namespace TA_API.Controllers.TA_APIControllers
         {
             this._repository = _repository;
         }
+
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public IActionResult Post([FromForm] CandidateProfileModel candidateProfile)

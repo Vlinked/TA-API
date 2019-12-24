@@ -10,7 +10,7 @@ namespace TA_API.Interface
     public interface IUserRegister
     {
         Users CreateUser(UsersModel model);
-
+        Users UpdateUser(updatemodel model);
         Users LoginUser(LoginModel loginModel);
 
     }

@@ -89,5 +89,45 @@ namespace TA_API.Services
                 throw ex;
             }
         }
+
+        public Users UpdateUser(updatemodel model)
+        {
+            string ResponesUrl = string.Empty;
+            try
+            {
+                Users userslist = repository.FindByCondition(x => x.Userid == model.Userid).FirstOrDefault();
+                if (userslist == null)
+                {
+                    throw new HttpException((int)HttpStatusCode.NotFound, "Userid Not Found,Please Try Again");
+                }
+                if (model.FileExist)
+                {
+                    using (var fileStream = model.ImageUpload.OpenReadStream())
+                    {
+
+                        byte[] fileData = new byte[model.ImageUpload.Length];
+                        string mimeType = model.ImageUpload.ContentType;
+                        string strContainerName = "imagecontainer";
+                        BlobStorageService objBlobService = new BlobStorageService();
+                        ResponesUrl = objBlobService.UploadFileToBlob(model.ImageUpload.FileName, fileData, mimeType, strContainerName);
+                    }
+                    userslist.ProfileImg = ResponesUrl;
+                    userslist.LastModifiedDate = DateTime.Now.ToString();
+                    repository.Update(userslist);
+                    repository.Save();
+                }
+
+                return userslist;
+            }
+            catch (HttpException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

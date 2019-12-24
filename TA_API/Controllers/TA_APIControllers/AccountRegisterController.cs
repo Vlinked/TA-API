@@ -45,6 +45,27 @@ namespace TA_API.Controllers.TA_APIControllers
             }
         }
 
-
+        [HttpPut]
+        [Consumes("multipart/form-data")]
+        public IActionResult put([FromForm] updatemodel updatemodel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                Users users = _repository.UpdateUser(updatemodel);
+                return Ok(new { Status = StatusCodes.Status200OK, Message = "success", users });
+            }
+            catch (HttpException ex)
+            {
+                return new ObjectResult(new { Status = ex.StatusCode, Message = ex.StatusDescription });
+            }
+            catch (Exception ex)
+            {
+                return new ObjectResult(new { Status = StatusCodes.Status500InternalServerError, Message = ex.Message });
+            }
+        }
     }
 }
