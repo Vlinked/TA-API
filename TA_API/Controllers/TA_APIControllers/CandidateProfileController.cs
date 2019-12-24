@@ -25,6 +25,7 @@ namespace TA_API.Controllers.TA_APIControllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
+
         public IActionResult Post([FromForm] CandidateProfileModel candidateProfile)
         {
             try
@@ -40,8 +41,6 @@ namespace TA_API.Controllers.TA_APIControllers
             {
                 return new ObjectResult(new { Status = StatusCodes.Status500InternalServerError, Message = ex.Message });
             }
-
-
         }
     }
 }

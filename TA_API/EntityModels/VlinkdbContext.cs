@@ -16,6 +16,9 @@ namespace TA_API.EntityModels
         }
 
         public virtual DbSet<CandidateProfile> CandidateProfile { get; set; }
+        public virtual DbSet<Designation> Designation { get; set; }
+        public virtual DbSet<JobApplied> JobApplied { get; set; }
+        public virtual DbSet<NewJob> NewJob { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
@@ -84,6 +87,70 @@ namespace TA_API.EntityModels
 
                 entity.Property(e => e.Skills)
                     .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Designation>(entity =>
+            {
+                entity.HasKey(e => e.DesgnId)
+                    .HasName("PK__Designat__69F80A41A08C8C7F");
+
+                entity.Property(e => e.DesignationName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<JobApplied>(entity =>
+            {
+                entity.HasKey(e => e.JobApplId)
+                    .HasName("PK__JobAppli__E4CE0E7D732F3E4E");
+
+                entity.Property(e => e.CreateDate)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Designation)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<NewJob>(entity =>
+            {
+                entity.HasKey(e => e.JobId)
+                    .HasName("PK__NewJob__056690C263F0CFA3");
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ctc)
+                    .HasColumnName("CTC")
+                    .HasColumnType("money");
+
+                entity.Property(e => e.JobType)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastmodifiedDate)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NoticePeriod)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Positions).HasColumnName("positions");
+
+                entity.Property(e => e.Qualification)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SkillSet)
+                    .IsRequired()
+                    .HasMaxLength(500)
                     .IsUnicode(false);
             });
 

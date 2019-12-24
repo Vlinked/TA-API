@@ -41,6 +41,8 @@ namespace TA_API
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserRegister, UserRegister>();
             services.AddTransient<ICandidateProfile, CandidateProfileService>();
+            services.AddTransient<INewJob, NewJobService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TA_API", Version = "v1" });
