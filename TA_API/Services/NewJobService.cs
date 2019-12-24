@@ -59,16 +59,27 @@ namespace TA_API.Services
 
         public NewJob UpdateJob(NewJob newJobmodel)
         {
-
             try
             {
+                NewJob jobs = repository.FindBy(x => x.JobId == newJobmodel.JobId && newJobmodel.IsCompleted==false).FirstOrDefault();
 
-                return null;
+                if (jobs==null)
+                {
+                    throw new HttpException((int)HttpStatusCode.NotFound, "JobId not Found ,Please Try Again");
+                }
+                jobs.LastmodifiedDate = DateTime.Now.ToString();
+                repository.Update(jobs);
+                repository.Save();
+                return newJobmodel;
             }
-            catch (Exception)
+            catch (HttpException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
     }

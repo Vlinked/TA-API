@@ -41,6 +41,10 @@ namespace TA_API.Controllers.TA_APIControllers
         [HttpPost]
         public IActionResult Post(NewJob newJobmodel)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 NewJob job = _repository.CreateJobs(newJobmodel);
@@ -58,16 +62,24 @@ namespace TA_API.Controllers.TA_APIControllers
 
 
         [HttpPut]
-        public IActionResult Put()
+        public IActionResult Put(NewJob newJobmodel)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
-                return Ok(new { Status = StatusCodes.Status200OK, Message = "success" });
+                NewJob job = _repository.UpdateJob(newJobmodel);
+                return Ok(new { Status = StatusCodes.Status200OK, Message = "success", job });
             }
-            catch (Exception)
+            catch (HttpException ex)
             {
-
-                throw;
+                return new ObjectResult(new { Status = ex.StatusCode, Message = ex.StatusDescription });
+            }
+            catch (Exception ex)
+            {
+                return new ObjectResult(new { Status = StatusCodes.Status500InternalServerError, Message = ex.Message });
             }
         }
     }
