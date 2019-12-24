@@ -61,7 +61,7 @@ namespace TA_API.Services
         {
             try
             {
-                NewJob jobs = repository.FindBy(x => x.JobId == newJobmodel.JobId && newJobmodel.IsCompleted==false).FirstOrDefault();
+                NewJob jobs = repository.FindBy(x => x.JobId == newJobmodel.JobId && x.IsCompleted==false).FirstOrDefault();
 
                 if (jobs==null)
                 {

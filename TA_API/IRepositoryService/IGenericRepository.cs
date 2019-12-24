@@ -16,5 +16,6 @@ namespace TA_API.IRepositoryService
         void Save();
         IEnumerable<T> FindByCondition(Expression<Func<T, bool>> expression);
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
+
     }
 }

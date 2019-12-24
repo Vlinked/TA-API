@@ -103,7 +103,7 @@ namespace TA_API.EntityModels
             modelBuilder.Entity<JobApplied>(entity =>
             {
                 entity.HasKey(e => e.JobApplId)
-                    .HasName("PK__JobAppli__E4CE0E7DDE9CF304");
+                    .HasName("PK__JobAppli__E4CE0E7D7823E55D");
 
                 entity.Property(e => e.CreateDate)
                     .HasMaxLength(100)
@@ -112,6 +112,12 @@ namespace TA_API.EntityModels
                 entity.Property(e => e.Designation)
                     .IsRequired()
                     .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastModifiedBy).HasColumnName("LastModifiedBY");
+
+                entity.Property(e => e.LastModifiedDate)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
 

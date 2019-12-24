@@ -9,5 +9,7 @@ namespace TA_API.Interface
     public interface IJobApplied
     {
         JobApplied CreateJobApplied(JobApplied jobAppliedmodel);
+
+        JobApplied RejectJobApplied(JobApplied jobAppliedmodel);
     }
 }

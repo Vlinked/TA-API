@@ -99,5 +99,8 @@ namespace TA_API.RepositoryService
             var query = this._context.Set<T>().Where(predicate);
             return includes.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
+
+
+
     }
 }

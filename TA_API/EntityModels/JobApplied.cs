@@ -12,5 +12,7 @@ namespace TA_API.EntityModels
         public int ProfiledId { get; set; }
         public bool IsAccepted { get; set; }
         public string CreateDate { get; set; }
+        public int? LastModifiedBy { get; set; }
+        public string LastModifiedDate { get; set; }
     }
 }
