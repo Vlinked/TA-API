@@ -11,5 +11,8 @@ namespace TA_API.Interface
     public interface ICandidateProfile
     {
         CandidateProfile ProfileSave(CandidateProfileModel Profile);
+
+        List<Designation> GetDesignation();
+
     }
 }

@@ -18,10 +18,28 @@ namespace TA_API.Services
     {
 
         private IGenericRepository<CandidateProfile> repository = null;
-        public CandidateProfileService(IGenericRepository<CandidateProfile> repository)
+        private IGenericRepository<Designation> repositorys = null;
+
+        public CandidateProfileService(IGenericRepository<CandidateProfile> repository, IGenericRepository<Designation> _repositorys)
         {
             this.repository = repository;
+            this.repositorys = _repositorys;
         }
+
+        public List<Designation> GetDesignation()
+        {
+            try
+            {
+                List<Designation> designations = repositorys.GetAll().ToList();
+                return designations;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public CandidateProfile ProfileSave(CandidateProfileModel Profilemodel)
         {
             string ResponesUrl = string.Empty;
